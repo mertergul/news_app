@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/service_locator.dart';
+import '../../../widgets/empty_view.dart';
+import '../../../widgets/error_view.dart';
+import '../../../widgets/loading_indicator.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
+import 'widgets/post_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,46 +15,47 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<HomeCubit>()..fetchPosts(),
-      child: Scaffold(
-        appBar: AppBar(title: const Text('News App')),
-        body: BlocBuilder<HomeCubit, HomeState>(
-          builder: (context, state) {
-            if (state is HomeLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
+      child: const HomeView(),
+    );
+  }
+}
 
-            if (state is HomeError) {
-              return Center(
-                child: Text(
-                  state.message,
-                  style: const TextStyle(color: Colors.red),
-                ),
-              );
-            }
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
-            if (state is HomeSuccess) {
-              return ListView.builder(
-                itemCount: state.posts.length,
-                itemBuilder: (context, index) {
-                  final post = state.posts[index];
-                  return Card(
-                    margin: const EdgeInsets.all(8.0),
-                    child: ListTile(
-                      title: Text(
-                        post.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(post.body),
-                    ),
-                  );
-                },
-              );
-            }
-
-            return const Center(child: Text('No posts available'));
-          },
-        ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('News App')),
+      body: BlocBuilder<HomeCubit, HomeState>(
+        builder: (context, state) {
+          return _buildBody(context, state);
+        },
       ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, HomeState state) {
+    if (state is HomeLoading) {
+      return const LoadingIndicator(message: 'Loading posts...');
+    }
+
+    if (state is HomeError) {
+      return ErrorView(
+        message: state.message,
+        onRetry: () {
+          context.read<HomeCubit>().fetchPosts();
+        },
+      );
+    }
+
+    if (state is HomeSuccess) {
+      return PostList(posts: state.posts);
+    }
+
+    return const EmptyView(
+      message: 'No posts available',
+      icon: Icons.article_outlined,
     );
   }
 }

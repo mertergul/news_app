@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../../../data/models/post_model.dart';
+import 'package:news_app/app/data/models/post_model.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();

@@ -1,6 +1,6 @@
-import '../../core/constants/api_constants.dart';
-import '../../core/network/api_client.dart';
-import '../models/post_model.dart';
+import 'package:news_app/app/core/constants/api_constants.dart';
+import 'package:news_app/app/core/network/api_client.dart';
+import 'package:news_app/app/data/models/post_model.dart';
 
 class PostRemoteDataSource {
   final ApiClient _apiClient;

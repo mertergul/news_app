@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import '../constants/api_constants.dart';
-import 'interceptors/auth_interceptor.dart';
-import 'interceptors/logging_interceptor.dart';
+import 'package:news_app/app/core/constants/api_constants.dart';
+import 'package:news_app/app/core/network/interceptors/auth_interceptor.dart';
+import 'package:news_app/app/core/network/interceptors/logging_interceptor.dart';
 
 class ApiClient {
   late final Dio _dio;

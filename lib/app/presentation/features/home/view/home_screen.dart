@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/di/service_locator.dart';
-import '../../../widgets/empty_view.dart';
-import '../../../widgets/error_view.dart';
-import '../../../widgets/loading_indicator.dart';
-import '../cubit/home_cubit.dart';
-import '../cubit/home_state.dart';
+import 'package:news_app/app/core/di/service_locator.dart';
+import 'package:news_app/app/presentation/widgets/empty_view.dart';
+import 'package:news_app/app/presentation/widgets/error_view.dart';
+import 'package:news_app/app/presentation/widgets/loading_indicator.dart';
+import 'package:news_app/app/presentation/features/home/cubit/home_cubit.dart';
+import 'package:news_app/app/presentation/features/home/cubit/home_state.dart';
 import 'widgets/post_list.dart';
 
 class HomeScreen extends StatelessWidget {

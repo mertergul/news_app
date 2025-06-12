@@ -3,10 +3,12 @@ import '../network/api_client.dart';
 import '../../data/datasources/post_remote_data_source.dart';
 import '../../data/repositories/post_repository.dart';
 import '../../presentation/features/home/cubit/home_cubit.dart';
+import '../notification/firebase_notification_manager.dart';
+import '../notification/notification_protocol.dart';
 
 final GetIt getIt = GetIt.instance;
 
-void setup() {
+Future<void> setup() async {
   // ApiClient - Singleton
   getIt.registerLazySingleton<ApiClient>(() => ApiClient());
 
@@ -22,4 +24,9 @@ void setup() {
 
   // HomeCubit - Factory
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<PostRepository>()));
+
+  // Register notification manager
+  final notificationManager = FirebaseNotificationManager();
+  getIt.registerSingleton<INotificationManager>(notificationManager);
+  await notificationManager.initialize();
 }

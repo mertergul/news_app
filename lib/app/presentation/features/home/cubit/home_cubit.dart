@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/di/service_locator.dart';
 import '../../../../data/repositories/post_repository.dart';
 import 'home_state.dart';
 

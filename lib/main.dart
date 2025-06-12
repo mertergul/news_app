@@ -3,9 +3,15 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'app/core/di/service_locator.dart';
 import 'app/presentation/features/home/view/home_screen.dart';
 
-Future<void> main() async {
-  await dotenv.load(fileName: ".env");
-  setup();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Load environment variables
+  await dotenv.load();
+
+  // Initialize service locator
+  await setup();
+
   runApp(const MyApp());
 }
 

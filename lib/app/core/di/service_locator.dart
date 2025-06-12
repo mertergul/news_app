@@ -1,10 +1,11 @@
 import 'package:get_it/get_it.dart';
-import '../network/api_client.dart';
-import '../../data/datasources/post_remote_data_source.dart';
-import '../../data/repositories/post_repository.dart';
-import '../../presentation/features/home/cubit/home_cubit.dart';
-import '../notification/firebase_notification_manager.dart';
-import '../notification/notification_protocol.dart';
+
+import 'package:news_app/app/data/datasources/post_remote_data_source.dart';
+import 'package:news_app/app/data/repositories/post_repository.dart';
+import 'package:news_app/app/presentation/features/home/cubit/home_cubit.dart';
+import 'package:news_app/app/core/network/api_client.dart';
+import 'package:news_app/app/core/services/notification/firebase_notification_manager.dart';
+import 'package:news_app/app/core/services/notification/notification_protocol.dart';
 
 final GetIt getIt = GetIt.instance;
 
